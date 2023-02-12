@@ -1,3 +1,7 @@
+/*
+ Note: The returned array must be malloced, assume caller calls free().
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,16 +13,16 @@ Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,.
 Return the array in the form [x1,y1,x2,y2,...,xn,yn].
 =======================================================================================
 */
-int* Shuffle( int* nums, int numsSize, int n, int* returnSize) {
+int* Shuffle( int* nums, int numsSize, int n, int* returnSize ) {
     int i = 0;
-    int l = 0;
-    int r = numsSize / 2;
+    int left = 0;
+    int right = n;
 
-    int* shuffled = (int*) malloc(sizeof(int) * numsSize);
+    int* shuffled = (int*) malloc( sizeof(int) * numsSize );
 
     while ( i < numsSize ) {
-        shuffled[i] = nums[l++];
-        shuffled[i+1] = nums[r++];
+        shuffled[i] = nums[left++];
+        shuffled[i+1] = nums[right++];
         i+=2;
     }
 
@@ -27,16 +31,13 @@ int* Shuffle( int* nums, int numsSize, int n, int* returnSize) {
     return shuffled;
 }
 
-int main(int argc, char const *argv[]) {
+int main( int argc, char const *argv[] ) {
 
-    // ----------------
-    // tests
-
-    int nums[] = {2,5,1,3,4,7};
-    //int nums[] = {1,2,3,4,4,3,2,1};
-    //int nums[] = {1,1,2,2};
-
-    // ----------------
+    // -----------------------
+    //int nums[] = {2,5,1,3,4,7}; // Expected Output: [2,3,5,4,1,7]
+    //int nums[] = {1,2,3,4,4,3,2,1}; // Expected Output: [1,4,2,3,3,2,4,1]
+    int nums[] = {1,1,2,2}; // Expected Output: [1,2,1,2]
+    // -----------------------
 
     int numsSize = sizeof(nums) / sizeof(nums[0]);
     int n = numsSize / 2;
@@ -48,7 +49,7 @@ int main(int argc, char const *argv[]) {
         printf("%d ", shuffledArray[i]);
     }
 
-    free(shuffledArray);
+    free( shuffledArray );
 
     return 0;
 }

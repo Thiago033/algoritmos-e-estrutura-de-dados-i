@@ -1,8 +1,8 @@
-### Nome: 
+### Nome:
 Thiago Lopes
 
 ### Regras De Código:
-https://web.stanford.edu/class/cs106b/resources/style_guide.html
+https://fabiensanglard.net/fd_proxy/doom3/CodeStyleConventions.pdf/
 
 ### Exercicio:
 #### Continuacao Da Atividade 1
@@ -12,13 +12,13 @@ Exercicio LeetCode: [1470. Shuffle the Array](https://leetcode.com/problems/shuf
 https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/tree/main/atividade-aula-1
 
 ### Codigo:
-codigo esta funcionando normalmente.
-possivel leak de memoria apresentado no dr-memory.
+Codigo funcionando normalmente.
+Possivel leak de memoria apresentado no dr-memory.
 
 ### Lista De Testes:
 nums = [2,5,1,3,4,7]\
 nums = [1,2,3,4,4,3,2,1]\
 nums = [1,1,2,2]
 
-### Analise Dr. Memory:
+### Teste Dr. Memory:
 https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/atividade-aula-1/test-dr-memory.txt
