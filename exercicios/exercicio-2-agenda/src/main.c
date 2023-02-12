@@ -17,7 +17,7 @@ void AddName() {
     scanf("%s", newName);
 
    
-    strcat(newName, "/"); // Separate each name by slash(/)
+    strcat(newName, "-"); // Separate each name by slash(/)
     
     
     names = (char*) realloc( names, sizeof(newName) * sizeof(char) + 2 ); // Reallocate space to a new name
@@ -39,7 +39,21 @@ void AddName() {
 }
 
 void PrintNames() {
-    printf("%s\n", names);
+    system("cls");
+
+    // Duplicate the string names
+    char *string = strdup(names);
+
+    // get the first token
+    char *name = strtok( string, "-" );
+
+    // walk through other tokens
+    while( name != NULL ) {
+        printf("%s\n", name);
+
+        // get next token
+        name = strtok( NULL, "-" );
+    }
 }
 
 int main() {
@@ -64,7 +78,7 @@ int main() {
                 AddName();
                 break;
             case 2:
-                RemoveName();
+                //RemoveName();
                 break;
             case 3:
                 PrintNames();
