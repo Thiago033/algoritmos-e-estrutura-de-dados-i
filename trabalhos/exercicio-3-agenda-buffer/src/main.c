@@ -12,8 +12,25 @@ int nameSize = ((sizeof(char) * 10) + 1);
 int ageSize  = ((sizeof(char) * 10) + 1) + sizeof(int);
 
 
-void AddPerson () {
-    printf("teste");
+void AddPerson( char *name, int *age, int *phoneNumber ) {
+    char tempName[10];
+    int tempAge, tempPhone;
+
+    printf("Enter the name: ");
+    gets(tempName);
+    strcpy(name,tempName);
+
+    printf("Enter the age: ");
+    scanf("%d", &tempAge);
+    age = tempAge;
+
+    printf("Enter the phone number: ");
+    scanf("%d", &tempPhone);
+    phoneNumber = tempPhone;
+}
+
+void PrintList(  ) {
+    //criar funcao para testar a lista
 }
 
 int main(int argc, char const *argv[]) {
@@ -59,7 +76,7 @@ int main(int argc, char const *argv[]) {
                     phoneNumber = pBuffer + ageSize  + personSize * personCounter;
                 }
 
-                AddPerson();
+                AddPerson( name, age, phoneNumber );
 
                 personCounter++;
                 break;
