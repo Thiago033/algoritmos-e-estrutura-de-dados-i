@@ -2,18 +2,38 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Global Variables
 void *pBuffer = NULL;
+
+                    // 10 char + '/0'                      
+int personSize = ((sizeof(char) * 10) + 1) + sizeof(int) + sizeof(int);
+
+int nameSize = ((sizeof(char) * 10) + 1);
+int ageSize  = ((sizeof(char) * 10) + 1) + sizeof(int);
+
+
+void AddPerson () {
+    printf("teste");
+}
 
 int main(int argc, char const *argv[]) {
     
-    pBuffer = (void*)(malloc( sizeof(int) ));
+    pBuffer = (void*)(malloc( personSize ));
     
     if ( pBuffer == NULL ) {
         printf("Memory Allocation Error!\n");
         exit (1);
     }
 
-    int option;
+    // Person
+    char *name = NULL;
+    int *age = NULL, *phoneNumber = NULL;
+
+    name        = pBuffer;
+    age         = pBuffer + nameSize;
+    phoneNumber = pBuffer + ageSize;
+
+    int option, personCounter = 0;
 
     do {
         printf("1) Add Person\n");
@@ -25,7 +45,23 @@ int main(int argc, char const *argv[]) {
 
         switch (option) {
             case 1:
-                //AddPerson()
+                if ( personCounter != 0 ) {
+
+                    pBuffer = (void*) realloc( pBuffer, (personSize * (personCounter+1)) );
+
+                    if ( !pBuffer ){
+                        printf("Memory Allocation Error!\n");
+                        exit (1);
+                    }
+
+                    name        = pBuffer +            personSize * personCounter;
+                    age         = pBuffer + nameSize + personSize * personCounter;
+                    phoneNumber = pBuffer + ageSize  + personSize * personCounter;
+                }
+
+                AddPerson();
+
+                personCounter++;
                 break;
 
             case 2:
