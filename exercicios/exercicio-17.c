@@ -5,26 +5,24 @@
 int main() {
     int num, index = 0, auxIndex = 0;
 
-    int *array = malloc(sizeof(int) * 10);
+    int *array = malloc(sizeof(int) * 2);
 
     while ( num != 0 ) {
-        printf("Enter '0' to quit.");
+        printf("Enter a integer greater than 0, or enter '0' to quit.\n");
         scanf("%d", &num);
+
+        if (!num) break;
 
         array[index++] = num;
         auxIndex++;
 
-        if ( auxIndex == 10 ) {
-            int *tempArray = malloc( sizeof(int) * (index + 10) );
-            
+        if ( auxIndex == 2 ) {
+            int *tempArray = malloc( sizeof(int) * (index + 2) );
             memcpy(tempArray, array, index * sizeof(int));
-            free(array);
-
             array = tempArray;
 
             auxIndex = 0;
 
-            free(tempArray);
         }
     }
 
