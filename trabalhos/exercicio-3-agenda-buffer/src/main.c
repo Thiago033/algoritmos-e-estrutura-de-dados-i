@@ -29,8 +29,14 @@ void AddPerson( char *name, int *age, int *phoneNumber ) {
     phoneNumber = tempPhone;
 }
 
-void PrintList(  ) {
-    //criar funcao para testar a lista
+void PrintList( int personCounter ) {
+    system("cls");
+    for ( int i = 0; i < (personCounter); i++ ) {
+        printf("User %d\n", i+1);
+        printf("Name: %s\n"          , (char*) (pBuffer            + (personSize * i)));
+        printf("Age: %d\n"           , *(int*) (pBuffer + nameSize + (personSize * i)));
+        printf("Phone Number: %d\n\n", *(int*) (pBuffer + ageSize  + (personSize * i)));
+    }
 }
 
 int main(int argc, char const *argv[]) {
