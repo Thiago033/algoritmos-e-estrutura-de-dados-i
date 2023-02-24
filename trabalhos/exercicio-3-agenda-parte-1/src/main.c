@@ -5,7 +5,7 @@
 // Global Variables
 void *pBuffer = NULL;
 
-                    // 10 char + '/0'                      
+                        // 10 char + '/0'                      
 int personSize = ((sizeof(char) * 10) + 1) + sizeof(int) + sizeof(int);
 
 int nameSize = ((sizeof(char) * 10) + 1);

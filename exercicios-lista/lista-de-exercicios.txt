@@ -1,0 +1,1 @@
+Exercicios da lista: https://programacaodescomplicada.wordpress.com/complementar/
