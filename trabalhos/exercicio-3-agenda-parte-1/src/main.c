@@ -11,33 +11,31 @@ int personSize = ((sizeof(char) * 10) + 1) + sizeof(int) + sizeof(int);
 int nameSize = ((sizeof(char) * 10) + 1);
 int ageSize  = ((sizeof(char) * 10) + 1) + sizeof(int);
 
-
+int personCounter = 0;
+ 
 void AddPerson( char *name, int *age, int *phoneNumber ) {
     char tempName[10];
     int tempAge, tempPhone;
 
     printf("Enter the name: ");
+    fflush(stdin);
     gets(tempName);
     strcpy(name,tempName);
 
     printf("Enter the age: ");
+    fflush(stdin);
     scanf("%d", &tempAge);
-    *(int*) age = tempAge;
+    *age = tempAge;
 
     printf("Enter the phone number: ");
+    fflush(stdin);
     scanf("%d", &tempPhone);
-    *(int*) phoneNumber = tempPhone;
+    *phoneNumber = tempPhone;
 }
 
 void PrintList( int personCounter ) {
     system("cls");
-
-    if (!personCounter) {
-        printf("List is empty!\n");
-        return;
-    }
-
-    for ( int i = 0; i < (personCounter); i++ ) {
+    for ( int i = 0; i < personCounter; i++ ) {
         printf("User %d\n", i+1);
         printf("Name: %s\n"          , (char*) (pBuffer            + (personSize * i)));
         printf("Age: %d\n"           , *(int*) (pBuffer + nameSize + (personSize * i)));
@@ -46,20 +44,14 @@ void PrintList( int personCounter ) {
 }
 
 void SearchPerson(int personCounter){
-    char searchedName[10];
-
-    system("cls");
-
-    if (!personCounter) {
-        printf("List is empty!\n");
-        return;
-    }
+    char tempName[10];
     
+    system("cls");
     printf("Enter a name to search: ");
-    scanf("%s", searchedName);
+    scanf("%s", tempName);
 
     for ( int i = 0; i <= personCounter; i++ ) {
-        if ( strcmp( searchedName, (pBuffer + (personSize * i))) == 0 ) {
+        if ( strcmp( tempName, (pBuffer + (personSize * i))) == 0 ) {
             printf("Name: %s\n"          , (char*) (pBuffer            + (personSize * i)));
             printf("Age: %d\n"           , *(int*) (pBuffer + nameSize + (personSize * i)));
             printf("Phone Number: %d\n\n", *(int*) (pBuffer + ageSize  + (personSize * i)));
@@ -69,6 +61,43 @@ void SearchPerson(int personCounter){
     }
 
     printf("Name not founded!\n");
+}
+
+void RemovePerson ( int personCounter ) {
+    char tempName[10];
+
+    printf("Digite o nome que quer excluir: ");
+    fflush(stdin);
+    gets(tempName);
+
+    for( int i = 0; i < personCounter; i++ ) {
+
+        if ( strcmp( (char *) (pBuffer + personSize * i), tempName ) == 0 ) {
+
+            printf("Name: %s\n"          , (char*) (pBuffer            + (personSize * i)));
+            printf("Age: %d\n"           , *(int*) (pBuffer + nameSize + (personSize * i)));
+            printf("Phone Number: %d\n\n", *(int*) (pBuffer + ageSize  + (personSize * i)));
+
+            for ( int j = i; j < personCounter; j++ ) {
+
+                strcpy( 
+                    (char*)pBuffer + personSize * j,
+                    (char*)pBuffer + personSize * (j + 1)
+                );
+
+                *(int*)(pBuffer + nameSize + (personSize * j)) = *(int*)(pBuffer + nameSize + (personSize) * (j + 1));
+
+                *(int*)(pBuffer + ageSize + (personSize * j)) = *(int*)(pBuffer + ageSize + (personSize) * (j + 1));
+            }
+
+            personCounter = personCounter - 1;
+            pBuffer = realloc(pBuffer, personSize * personCounter);
+
+            return;
+        }
+    }
+
+    printf("Name not founded.");
 }
 
 int main(int argc, char const *argv[]) {
@@ -88,7 +117,7 @@ int main(int argc, char const *argv[]) {
     age         = pBuffer + nameSize;
     phoneNumber = pBuffer + ageSize;
 
-    int option, personCounter = 0;
+    int option;
 
     do {
         printf("1) Add Person\n");
@@ -120,11 +149,11 @@ int main(int argc, char const *argv[]) {
                 break;
 
             case 2:
-                //RemovePerson();
+                RemovePerson( personCounter );
                 break;
 
             case 3:
-                PrintList( personCounter);
+                PrintList( personCounter );
                 break;
 
             case 4:
