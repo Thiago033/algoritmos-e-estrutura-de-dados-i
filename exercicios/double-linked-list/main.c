@@ -127,59 +127,66 @@ void InsertAtPos( node *head, int data, int pos ) {
 //     POPs
 // =================
 // */
-// void DeleteAtEnd( node *head ) {
-//     if ( head == NULL ) {
-//         printf("Linked list is empty.");
-//     } else if ( head->link == NULL ){
-//         free(head);
-//         head = NULL;
-//     } else {
-//         node *ptr = head;
+void DeleteAtEnd( node *head ) {
+    if ( head == NULL ) {
+        printf("Linked list is empty.");
+    }
 
-//         while ( ptr->link->link != NULL) {
-//             ptr = ptr->link;
-//         }
+    node *ptr = head;
+    node *ptr2;
 
-//         free( ptr->link );
-//         ptr->link = NULL;
-//     }
-// }
+    while ( ptr->next != NULL) {
+        ptr = ptr->next;
+    }
 
-// void DeleteAtBeg( node **head ) {
-//     if ( *head == NULL ) {
-//         printf("Linked list is empty.");
-//     } else {
-//         node *ptr = *head;
+    ptr2 = ptr->next;
+    ptr2->next = NULL;
+    free( ptr );
+}
 
-//         *head = (*head)->link;
+void DeleteAtBeg( node **head ) {
+    if ( *head == NULL ) {
+        printf("Linked list is empty.");
+    } else {
+        node *ptr = *head;
 
-//         free( ptr );
-//         ptr = NULL;
-//     }
-// }
+        *head = (*head)->next;
 
-// void DeleteAtPos( node **head, int pos ) {
-//     node *current = *head;
-//     node *previous = *head;
+        free( ptr );
+        ptr = NULL;
+        (*head)->prev = NULL;
+    }
+}
 
-//     if ( *head == NULL ) {
-//         printf("Linked list is empty.");
-//     } else if ( pos == 1 ) {
-//         *head = current->link;
-//         free( current );
-//         current = NULL;
-//     } else {
-//         while ( pos != 1 ) {
-//             previous = current;
-//             current = current->link;
-//             pos--;
-//         }
+void DeleteAtPos( node **head, int pos ) {
+    node *current = *head;
+    node *previous = NULL;
 
-//         previous->link = current->link;
-//         free( current );
-//         current = NULL;
-//     }
-// }
+    if ( *head == NULL ) {
+        printf("Linked list is empty.");
+    } else if ( pos == 1 ) {
+        *head = current->link;
+        free( current );
+        current = NULL;
+    } else {
+        while ( pos != 1 ) {
+            current = current->next;
+            pos--;
+        }
+
+        if (current->next == NULL) {
+            previous = current->next;
+            previous->next = NULL;
+            free( current );
+        } else {
+            previous = current->prev;
+            previous->next = current->next;
+            current->next->prev = previous;
+            free( current );
+            current = NULL;
+        }
+    }
+}
 
 // void DeleteAllList( node **head ) {
 //     if ( *head == NULL ) {
