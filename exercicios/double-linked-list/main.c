@@ -7,24 +7,24 @@ typedef struct node{
     struct node *prev;
 } node;
 
-// void CountOfNodes( node *head ) {
-//     int count = 0;
+void CountOfNodes( node *head ) {
+    int count = 0;
 
-//     if ( head == NULL ) {
-//         printf("Linked list is empty.\n");
-//         return;
-//     }
+    if ( head == NULL ) {
+        printf("Linked list is empty.\n");
+        return;
+    }
 
-//     node *ptr = NULL;
-//     ptr = head;
+    node *ptr = NULL;
+    ptr = head;
 
-//     while (ptr != NULL) {
-//         count++;
-//         ptr = ptr->link;
-//     }
+    while (ptr != NULL) {
+        count++;
+        ptr = ptr->next;
+    }
 
-//     printf("Nodes in the list: %d\n", count);
-// }
+    printf("Nodes in the list: %d\n", count);
+}
 
 void PrintListData( node *head ) {
     if ( head == NULL ) {
@@ -41,19 +41,23 @@ void PrintListData( node *head ) {
     }
 }
 
-// void ReverseList ( node **head ) {
+void ReverseList ( node **head ) {
 
-//     node *prev = NULL, *next = NULL;
+    node *ptr = *head;
+    node *ptr2 = ptr->next;
 
-//     while ( *head != NULL ) {
-//         next = (*head)->link;
-//         (*head)->link = prev;
-//         prev = *head;
-//         *head = next;
-//     }
+    ptr->next = NULL;
+    ptr->prev = ptr2;
 
-//     *head = prev;
-// }
+    while ( ptr2 != NULL ) {
+        ptr2->prev = ptr2->next;
+        ptr2->next = ptr;
+        ptr = ptr2;
+        ptr2 = ptr2->prev;
+    }
+
+    *head = ptr;
+}
 
 /*
 =================
@@ -133,14 +137,12 @@ void DeleteAtEnd( node *head ) {
     }
 
     node *ptr = head;
-    node *ptr2;
 
     while ( ptr->next != NULL) {
         ptr = ptr->next;
     }
 
-    ptr2 = ptr->next;
-    ptr2->next = NULL;
+    ptr->prev->next = NULL;
     free( ptr );
 }
 
@@ -165,43 +167,46 @@ void DeleteAtPos( node **head, int pos ) {
     if ( *head == NULL ) {
         printf("Linked list is empty.");
     } else if ( pos == 1 ) {
-        *head = current->link;
+        *head = current->next;
+
         free( current );
         current = NULL;
+        (*head)->prev = NULL;
     } else {
-        while ( pos != 1 ) {
+        while ( pos > 1 ) {
             current = current->next;
             pos--;
         }
 
         if (current->next == NULL) {
-            previous = current->next;
-            previous->next = NULL;
-            free( current );
+            current->prev->next = NULL;
+            free( current ); 
+
         } else {
             previous = current->prev;
             previous->next = current->next;
             current->next->prev = previous;
+
             free( current );
             current = NULL;
         }
     }
 }
 
-// void DeleteAllList( node **head ) {
-//     if ( *head == NULL ) {
-//         printf("Linked list is empty.\n");
-//         return;
-//     }
+void DeleteAllList( node **head ) {
+    if ( *head == NULL ) {
+        printf("Linked list is empty.\n");
+        return;
+    }
 
-//     node *ptr = *head;
+    node *ptr = *head;
 
-//     while ( ptr != NULL ) {
-//         ptr = ptr->link;
-//         free( *head );
-//         *head = ptr;
-//     }
-// }
+    while ( ptr != NULL ) {
+        ptr = ptr->next;
+        free( *head );
+        *head = ptr;
+    }
+}
 
 
 int main() {
@@ -220,24 +225,29 @@ int main() {
 
     InsertAtPos( head, 11, 6);
 
+
     // 10 1 2 3 4 11
 
-    // DeleteAtEnd(head);
+    DeleteAtEnd(head);
 
-    // DeleteAtBeg(&head);
-    
-    // DeleteAtPos(&head, 2);
+    // 10 1 2 3 4
+
+    DeleteAtBeg(&head);
+
+    // 1 2 3 4
+
+    DeleteAtPos(&head, 2);
 
     // 1 3 4
 
-    // ReverseList(&head);
+    ReverseList(&head);
 
     // 4 3 1
 
-    // CountOfNodes( head );
+    CountOfNodes( head );
     PrintListData( head );
 
-    // DeleteAllList( &head );
+    DeleteAllList( &head );
 
     return 0;
 }
