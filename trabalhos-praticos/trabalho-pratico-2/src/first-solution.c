@@ -119,10 +119,11 @@ int main(int argc, char const *argv[]) {
     ListNode *head = NULL;
 
     Push( &head, 1);
-    Push( &head, 2);
-    Push( &head, 2);
     Push( &head, 1);
-    // List = [1,2,2,1]
+    Push( &head, 1);
+    Push( &head, 1);
+
+    // List = [1,1,1,1]
 
     if ( isPalindrome( head ) ) {
         printf("This number IS a palindrome.");

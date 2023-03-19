@@ -72,7 +72,8 @@ bool isPalindrome(struct ListNode* head) {
         prev = ptr;
         ptr = next;
     }
-    // list after reverse: 1 2 1 2
+    // list before reverse: 1 2 | 2 1
+    // list after reverse:  1 2 | 1 2
 
     // Update pointer after reversing the list.
     slow->next = prev;
