@@ -26,4 +26,8 @@ head = [1,2]     / return false\
 head = [1,1,1,1] / return true\
 
 ### Teste Dr. Memory:
+Primeira solucao:\
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos-praticos/trabalho-pratico-2/tests-dr-memory/test-first-solution%20copy.txt
 
+Segunda solucao:\
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos-praticos/trabalho-pratico-2/tests-dr-memory/test-second-solution.txt
