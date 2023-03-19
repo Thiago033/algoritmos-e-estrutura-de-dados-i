@@ -15,6 +15,27 @@ typedef struct ListNode {
     struct ListNode *next;
 } ListNode;
 
+
+/*
+=================================================
+ClearLinkedList
+
+    Clear all nodes in the list
+=================================================
+*/
+void ClearLinkedList( struct ListNode** head ) {
+    ListNode *ptr = *head;
+    ListNode *next;
+
+    while ( ptr != NULL ) {
+        next = ptr->next;
+        free(ptr);
+        ptr = next;
+    }
+
+    *head = NULL;
+}
+
 /*
 =================================================
 isPalindrome
@@ -30,7 +51,7 @@ bool isPalindrome(struct ListNode* head) {
     ListNode *fast= head;
 
     // If list contains only one element, return true.
-    if(!head->next)  return true;
+    if( head->next == NULL)  return true;
 
     // Find middle of linked list
     while ( fast->next && fast->next->next ) {              
@@ -116,6 +137,8 @@ int main(int argc, char const *argv[]) {
     } else {
         printf("This number is NOT a palindrome.");
     }
+
+    ClearLinkedList(&head);
 
     return 0;
 }

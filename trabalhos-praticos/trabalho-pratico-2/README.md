@@ -10,13 +10,14 @@ Exercicio: [Palindrome Linked List](https://www.dropbox.com/s/f1nnvgx13t0w7kk/t2
 Exercicio LeetCode: [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
 
 ### Git:
-X
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/tree/main/trabalhos-praticos/trabalho-pratico-2
 
 ### Codigo:
 Codigo feito em aula:
+Erro na funcao IsEmpty
+Erro no retorno da funcao IsPalindrome.
 
-
-Codigo com  com complexidade em tempo O(n) e em espaço O(1) feito em casa.\
+Codigo com  com complexidade em tempo O(n) e em espaço O(1) feito em casa:\
 Sem erros.
 
 ### Lista De Testes:
@@ -25,4 +26,4 @@ head = [1,2]     / return false\
 head = [1,1,1,1] / return true\
 
 ### Teste Dr. Memory:
-X
+

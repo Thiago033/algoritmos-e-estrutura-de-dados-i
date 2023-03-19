@@ -121,17 +121,14 @@ int main(int argc, char const *argv[]) {
     // Update pointer
     test->next = test2;
 
-
-    PrintList( head );
-
-    //Push( &head, 1);
-    //Push( &head, 2);
-    //Push( &head, 2);
-    //Push( &head, 1);
-
-
-    //test only
     nodeCounter = 3;
+
+    //PrintList( head );
+
+    //Push( &head, 1);
+    //Push( &head, 2);
+    //Push( &head, 2);
+    //Push( &head, 1);
 
     if ( isPalindrome( head ) ) {
         printf("true");

@@ -1,0 +1,53 @@
+Dr. Memory version 2.5.0 build 0 built on Oct 18 2021 03:01:22
+Windows version: WinVer=105;Rel=2009;Build=19045;Edition=Professional
+Dr. Memory results for pid 13404: "first-solution.exe"
+Application cmdline: "C:\Repositorio\algoritmos-e-estrutura-de-dados-i\trabalhos-praticos\trabalho-pratico-2\src\first-solution.exe"
+Recorded 124 suppression(s) from default C:\Program Files (x86)\Dr. Memory\bin64\suppress-default.txt
+
+Error #1: UNADDRESSABLE ACCESS beyond top of stack: reading 0x000000d1d6bff890-0x000000d1d6bff898 8 byte(s)
+# 0 ___chkstk_ms      
+# 1 _pei386_runtime_relocator
+# 2 __tmainCRTStartup 
+# 3 .l_start          
+# 4 KERNEL32.dll!BaseThreadInitThunk       +0x13     (0x00007ffc981c7614 <KERNEL32.dll+0x17614>)
+Note: @0:00:00.185 in thread 10512
+Note: 0x000000d1d6bff890 refers to 744 byte(s) beyond the top of the stack 0x000000d1d6bffb78
+Note: instruction: or     $0x0000000000000000 (%rcx) -> (%rcx)
+
+Error #2: POSSIBLE LEAK 127 direct bytes 0x0000027086b301c0-0x0000027086b3023f + 0 indirect bytes
+# 0 replace_malloc                    [d:\a\drmemory\drmemory\common\alloc_replace.c:2580]
+# 1 msvcrt.dll!malloc_crt
+# 2 msvcrt.dll!_setargv  
+# 3 msvcrt.dll!_getmainargs
+# 4 pre_cpp_init      
+# 5 msvcrt.dll!initterm  
+# 6 __tmainCRTStartup 
+# 7 .l_start          
+# 8 KERNEL32.dll!BaseThreadInitThunk +0x13     (0x00007ffc981c7614 <KERNEL32.dll+0x17614>)
+
+Error #3: LEAK 16 direct bytes 0x0000027086b30380-0x0000027086b30390 + 0 indirect bytes
+# 0 replace_malloc               [d:\a\drmemory\drmemory\common\alloc_replace.c:2580]
+# 1 Push              
+# 2 main              
+
+===========================================================================
+FINAL SUMMARY:
+
+DUPLICATE ERROR COUNTS:
+	Error #   1:      2
+
+SUPPRESSIONS USED:
+
+ERRORS FOUND:
+      1 unique,     2 total unaddressable access(es)
+      0 unique,     0 total uninitialized access(es)
+      0 unique,     0 total invalid heap argument(s)
+      0 unique,     0 total GDI usage error(s)
+      0 unique,     0 total handle leak(s)
+      0 unique,     0 total warning(s)
+      1 unique,     1 total,     16 byte(s) of leak(s)
+      1 unique,     1 total,    127 byte(s) of possible leak(s)
+ERRORS IGNORED:
+      3 unique,     3 total,    142 byte(s) of still-reachable allocation(s)
+         (re-run with "-show_reachable" for details)
+Details: C:\Users\thiag\AppData\Roaming\Dr. Memory\DrMemory-first-solution.exe.13404.000\results.txt
