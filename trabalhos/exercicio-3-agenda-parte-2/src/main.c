@@ -119,9 +119,21 @@ void AddPerson( char **head ) {
 
 // }
 
-// void PrintList() { 
+void PrintList( char **head ) {
+    if ( (*head) == NULL ) {
+        printf("List is empty.\n");
+    }
 
-// }
+    for ( *i = 0; *i < *personCounter; *i = *i + 1 ) {
+        printf("Person Number: %d\n", *i + 1);
+        printf("Name: %s\n",          (char *)(*head));
+        printf("Age: %d\n",           *(int *)(*head + NAMESIZE));
+        printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
+        printf("--------------------------------\n\n");
+
+        head = (char **)(*head + NAMESIZE + AGESIZE + PHONESIZE);
+    }
+}
 
 // void SearchPerson() {
 
@@ -167,7 +179,7 @@ int main( int argc, char const *argv[] ) {
             break;
 
         case 3:
-            //PrintList(  );
+            PrintList( &head );
             break;
 
         case 4:
