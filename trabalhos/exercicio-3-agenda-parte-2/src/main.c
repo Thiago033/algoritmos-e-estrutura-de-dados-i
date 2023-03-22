@@ -85,12 +85,6 @@ void AddPerson( char **head ) {
         ptr = (char **)(*ptr + NAMESIZE + AGESIZE + PHONESIZE);
     }
 
-    /*
-    =====================
-    Update Pointers    
-    =====================
-    */
-
     // Update the "next" pointer of newPerson;
     *(char **)(newPerson + NAMESIZE + AGESIZE + PHONESIZE) = *ptr;
 
@@ -119,8 +113,15 @@ void AddPerson( char **head ) {
 
 // }
 
+/*
+====================================
+PrintList
+
+    Print all list
+====================================
+*/
 void PrintList( char **head ) {
-    if ( (*head) == NULL ) {
+    if ( *head == NULL ) {
         printf("List is empty.\n");
     }
 
@@ -135,9 +136,9 @@ void PrintList( char **head ) {
     }
 }
 
-// void SearchPerson() {
+// void SearchPerson( ) {
 
-// }
+//}
 
 int main( int argc, char const *argv[] ) {
     // Main Buffer
