@@ -109,9 +109,30 @@ void AddPerson( char **head ) {
     *personCounter = *personCounter + 1;
 }
 
-// void RemovePerson() {
+void RemovePerson( char **head ) {
+    void *removedPerson = NULL;
+    //char **ptr = head;
+    
+    if ( *head != NULL ) {
+        removedPerson = *head; 
 
-// }
+        *head =  *(char **)(*head + NAMESIZE + AGESIZE + PHONESIZE); 
+
+        free(removedPerson);
+
+    } else {
+        printf ("List is empty.");
+    }
+    if ( *head == NULL) {  
+        last = NULL;
+    } else {
+        *(char **)(*head + NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *)) = NULL;
+    }
+
+    // List structure
+    // |NULL "A" 2000| <-> |1000 "B" 3000| <-> |2000 "C" NULL|
+    //      1000                2000                3000
+}
 
 /*
 ====================================
@@ -209,7 +230,7 @@ int main( int argc, char const *argv[] ) {
             break;
 
         case 2:
-            //RemovePerson(  );
+            RemovePerson( &head );
             break;
 
         case 3:
@@ -217,7 +238,7 @@ int main( int argc, char const *argv[] ) {
             break;
 
         case 4:
-            //SearchPerson( );
+            SearchPerson( &head );
             break;
 
         case 0:
