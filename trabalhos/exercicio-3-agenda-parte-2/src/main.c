@@ -136,9 +136,42 @@ void PrintList( char **head ) {
     }
 }
 
-// void SearchPerson( ) {
+/*
+====================================
+SearchPerson
 
-//}
+    Search person by name
+====================================
+*/
+void SearchPerson( char **head ) {
+    if ( *head == NULL ) {
+        printf("List is empty.\n");
+    }
+
+    printf("Enter the name to search: \n");
+    fflush(stdin);
+    gets( tempName );
+
+    if ( *head != NULL ) { 
+        printf("List is empty.\n");
+    }
+
+    while ( *head != NULL ) {
+        if ( strcmp( *head, tempName ) == 0 ) {
+        // If name founded, print and return
+            printf("Name: %s\n",          (char *)(*head));
+            printf("Age: %d\n",           *(int *)(*head + NAMESIZE));
+            printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
+
+            return;
+        } else {
+            // Jump to the next person
+            head = (char **)(*head + NEXT);
+        }
+    }
+
+    printf("Name not founded!\n");
+}
 
 int main( int argc, char const *argv[] ) {
     // Main Buffer
