@@ -1,36 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define NAMESIZE    sizeof(char) * 10 + 1
 #define AGESIZE     sizeof(int)
 #define PHONESIZE   sizeof(int)
+
 #define NEXT        NAMESIZE + AGESIZE + PHONESIZE
 #define PREVIOUS    NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *)
+
 #define PERSONSIZE  NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *) + sizeof(char *)
+
+// Persons List Head
+char *head = NULL;
+
+/*
+List structure
+    | name | age | phone | next | previous |
+
+    |"nameA" "ageA" "phoneA" 2000 NULL| <-> |"nameB" "ageB" "phoneB" 3000 1000| <-> |"nameC" "ageC" "phoneC" NULL 2000|
+                    1000                                    2000                                    3000
+*/
+
 
 // Main buffer
 void *pBuffer = NULL;
-
-
-// List Pointers
-//  List Start
-char *head = NULL;
-//  list End
-char *last = NULL;
 
 // pBuffer Variables
 int *option = NULL, *personCounter = NULL, *i = NULL;
 char *tempName  = NULL;
 int *tempAge = NULL, *tempPhone = NULL;
 
+/*
+==========================================
+isEmpty
+
+    Check if the list is empty
+
+    return TRUE if is empty
+    return FALSE otherwise
+==========================================
+*/
+bool isEmpty( char **head ) {
+    if ( *head == NULL ) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /*
-====================================
+==========================================
 NewPerson
 
-    Return a new person
-====================================
+    Return a pointer to a new person data
+==========================================
 */
 void* NewPerson() { 
     void *newPerson = NULL;
@@ -41,6 +66,7 @@ void* NewPerson() {
         printf("Error memory allocation");
         exit (1);
     }
+    system("cls");
 
     printf("Enter the name: \n");
     fflush(stdin);
@@ -54,14 +80,15 @@ void* NewPerson() {
     fflush(stdin);
     scanf("%d", tempPhone);
 
-    // Person Data
+
+    // Copy Person Data
     strcpy( (char *)(newPerson), tempName );
     *(int *)(newPerson + NAMESIZE) = *tempAge;
     *(int *)(newPerson + NAMESIZE + AGESIZE) = *tempPhone;
 
-    // Next Pointer
+    // Update "Next" Pointer
     *(char **)(newPerson + NEXT)     = NULL;
-    // Previous Poiter
+    // Update "Previous" Poiter
     *(char **)(newPerson + PREVIOUS) = NULL;
 
     return newPerson;
@@ -78,17 +105,18 @@ AddPerson
 void AddPerson( char **head ) {
     char **ptr = head;
 
+    // Creates a new person
     void *newPerson = NewPerson();
 
     while ( (*ptr != NULL) && strcmp( *ptr, newPerson ) < 1 ) {
         // Jump to the next person
-        ptr = (char **)(*ptr + NAMESIZE + AGESIZE + PHONESIZE);
+        ptr = (char **)(*ptr + NEXT);
     }
 
     // Update the "next" pointer of newPerson;
-    *(char **)(newPerson + NAMESIZE + AGESIZE + PHONESIZE) = *ptr;
+    *(char **)(newPerson + NEXT) = *ptr;
 
-    // Update the "next" pointer of ptr (element before newPerson);
+    // Update the "next" pointer of ptr;
     *ptr = newPerson;
 
     char *ptrPrevious = *head;
@@ -97,54 +125,59 @@ void AddPerson( char **head ) {
         ptrPrevious = *head;
 
         // Jump to the next person
-        head = (char **)(*head + NAMESIZE + AGESIZE + PHONESIZE);
+        head = (char **)(*head + NEXT);
 
         if ( *head != NULL ) {
-            // Update "previous pointer of newPerson"
-            *(char **)(*head + NAMESIZE + AGESIZE + PHONESIZE + sizeof(char **)) = ptrPrevious;
+            // Update "previous" pointer of newPerson
+            *(char **)(*head + PREVIOUS) = ptrPrevious;
         }
     }
 
-    last = ptrPrevious;
     *personCounter = *personCounter + 1;
 }
 
 void RemovePerson( char **head ) {
-    void *removedPerson = NULL;
-    //char **ptr = head;
+    char *ptr = NULL;
     
-    if ( *head != NULL ) {
-        removedPerson = *head; 
-
-        *head =  *(char **)(*head + NAMESIZE + AGESIZE + PHONESIZE); 
-
-        free(removedPerson);
-
+    if ( isEmpty( head ) ) {
+        system("cls");
+        printf("List is empty.\n\n");
+        return;
     } else {
-        printf ("List is empty.");
-    }
-    if ( *head == NULL) {  
-        last = NULL;
-    } else {
-        *(char **)(*head + NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *)) = NULL;
-    }
+        // Remove person on the head of the list
+        ptr = *head; 
 
-    // List structure
-    // |NULL "A" 2000| <-> |1000 "B" 3000| <-> |2000 "C" NULL|
-    //      1000                2000                3000
+        // Jump to the next person
+        *head =  *(char **)(*head + NEXT); 
+
+        free(ptr);
+
+        system("cls");
+        printf ("Person Removed.\n\n");
+
+        // If list is not empty after remove a person
+        if ( !isEmpty( head ) ) {
+            // Update "previous" pointer
+            *(char **)(*head + PREVIOUS) = NULL;
+        }
+
+        *personCounter = *personCounter - 1;
+    }
 }
 
-/*
-====================================
-PrintList
-
-    Print all list
-====================================
-*/
 void PrintList( char **head ) {
-    if ( *head == NULL ) {
-        printf("List is empty.\n");
+    if ( isEmpty( head ) ) {
+        system("cls");
+        printf("List is empty.\n\n");
+        return;
     }
+
+    system("cls");
+
+    printf("Person Counter: %d\n", *(int *)(personCounter));
+    printf("First name on the list: %s\n", (char *)(*head));
+    printf("Last name on the list: %s\n\n",(char *)(last));
+
 
     for ( *i = 0; *i < *personCounter; *i = *i + 1 ) {
         printf("Person Number: %d\n", *i + 1);
@@ -153,33 +186,27 @@ void PrintList( char **head ) {
         printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
         printf("--------------------------------\n\n");
 
-        head = (char **)(*head + NAMESIZE + AGESIZE + PHONESIZE);
+        head = (char **)(*head + NEXT);
     }
 }
 
-/*
-====================================
-SearchPerson
-
-    Search person by name
-====================================
-*/
 void SearchPerson( char **head ) {
-    if ( *head == NULL ) {
-        printf("List is empty.\n");
+    if ( isEmpty( head ) ) {
+        system("cls");
+        printf("List is empty.\n\n");
+        return;
     }
+
+    system("cls");
 
     printf("Enter the name to search: \n");
     fflush(stdin);
     gets( tempName );
 
-    if ( *head != NULL ) { 
-        printf("List is empty.\n");
-    }
-
     while ( *head != NULL ) {
         if ( strcmp( *head, tempName ) == 0 ) {
         // If name founded, print and return
+            system("cls");
             printf("Name: %s\n",          (char *)(*head));
             printf("Age: %d\n",           *(int *)(*head + NAMESIZE));
             printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
@@ -191,10 +218,12 @@ void SearchPerson( char **head ) {
         }
     }
 
+    system("cls");
     printf("Name not founded!\n");
 }
 
 int main( int argc, char const *argv[] ) {
+
     // Main Buffer
     pBuffer = (void *)(malloc( (sizeof(int) * 5) + (sizeof(char) * 10 + 1) ));
 
@@ -215,6 +244,13 @@ int main( int argc, char const *argv[] ) {
     tempName      = (char *)(pBuffer + (sizeof(int) * 3));
     tempAge       = (int *) (pBuffer + (sizeof(int) * 3) + (sizeof(char) * 10 + 1));
     tempPhone     = (int *) (pBuffer + (sizeof(int) * 4) + (sizeof(char) * 10 + 1));
+
+    /*
+        List Structure
+        |  i  | option | personCounter | tempName   | tempAge | tempPhone |
+        | int |   int  |      int      | char[10]+1 |    int  |    int    |
+    */
+
 
     do {
         printf("1) Add Person\n");
@@ -244,6 +280,9 @@ int main( int argc, char const *argv[] ) {
         case 0:
             system("cls");
             printf("Quit...");
+            free( pBuffer );
+            free( head );
+            exit(1);
             break;
         
         default:
