@@ -7,10 +7,10 @@
 #define AGESIZE     sizeof(int)
 #define PHONESIZE   sizeof(int)
 
+#define PERSONSIZE  NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *) + sizeof(char *)
+
 #define NEXT        NAMESIZE + AGESIZE + PHONESIZE
 #define PREVIOUS    NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *)
-
-#define PERSONSIZE  NAMESIZE + AGESIZE + PHONESIZE + sizeof(char *) + sizeof(char *)
 
 // Persons List Head
 char *head = NULL;
@@ -22,7 +22,6 @@ List structure
     |"nameA" "ageA" "phoneA" 2000 NULL| <-> |"nameB" "ageB" "phoneB" 3000 1000| <-> |"nameC" "ageC" "phoneC" NULL 2000|
                     1000                                    2000                                    3000
 */
-
 
 // Main buffer
 void *pBuffer = NULL;
@@ -66,6 +65,7 @@ void* NewPerson() {
         printf("Error memory allocation");
         exit (1);
     }
+
     system("cls");
 
     printf("Enter the name: \n");
@@ -95,12 +95,12 @@ void* NewPerson() {
 }
 
 /*
-====================================
+==========================================
 AddPerson
 
     Add a new person in the list,
     sorted in alphabetic order
-====================================
+==========================================
 */
 void AddPerson( char **head ) {
     char **ptr = head;
@@ -108,6 +108,7 @@ void AddPerson( char **head ) {
     // Creates a new person
     void *newPerson = NewPerson();
 
+    // Find position for the new data
     while ( (*ptr != NULL) && strcmp( *ptr, newPerson ) < 1 ) {
         // Jump to the next person
         ptr = (char **)(*ptr + NEXT);
@@ -116,13 +117,11 @@ void AddPerson( char **head ) {
     // Update the "next" pointer of newPerson;
     *(char **)(newPerson + NEXT) = *ptr;
 
-    // Update the "next" pointer of ptr;
+    // Store new person in the list
     *ptr = newPerson;
 
-    char *ptrPrevious = *head;
-
     while ( *head != NULL ) {
-        ptrPrevious = *head;
+        char ptrPrevious = *head;
 
         // Jump to the next person
         head = (char **)(*head + NEXT);
@@ -136,15 +135,24 @@ void AddPerson( char **head ) {
     *personCounter = *personCounter + 1;
 }
 
+/*
+==========================================
+RemovePerson
+
+    Remove person on the head of the list
+==========================================
+*/
 void RemovePerson( char **head ) {
     char *ptr = NULL;
     
+    system("cls");
+
     if ( isEmpty( head ) ) {
-        system("cls");
         printf("List is empty.\n\n");
         return;
     } else {
-        // Remove person on the head of the list
+    //Remove person on the head of the list
+
         ptr = *head; 
 
         // Jump to the next person
@@ -152,10 +160,9 @@ void RemovePerson( char **head ) {
 
         free(ptr);
 
-        system("cls");
         printf ("Person Removed.\n\n");
 
-        // If list is not empty after remove a person
+        // If list is not empty after remove person
         if ( !isEmpty( head ) ) {
             // Update "previous" pointer
             *(char **)(*head + PREVIOUS) = NULL;
@@ -165,19 +172,21 @@ void RemovePerson( char **head ) {
     }
 }
 
+/*
+==========================================
+PrintList
+
+    Prints all persons in the list,
+    sorted in alphabetic order
+==========================================
+*/
 void PrintList( char **head ) {
+    system("cls");
+
     if ( isEmpty( head ) ) {
-        system("cls");
         printf("List is empty.\n\n");
         return;
     }
-
-    system("cls");
-
-    printf("Person Counter: %d\n", *(int *)(personCounter));
-    printf("First name on the list: %s\n", (char *)(*head));
-    printf("Last name on the list: %s\n\n",(char *)(last));
-
 
     for ( *i = 0; *i < *personCounter; *i = *i + 1 ) {
         printf("Person Number: %d\n", *i + 1);
@@ -186,18 +195,25 @@ void PrintList( char **head ) {
         printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
         printf("--------------------------------\n\n");
 
+        // Jump to the next person
         head = (char **)(*head + NEXT);
     }
 }
 
+/*
+==========================================
+SearchPerson
+
+    Prints a person specified by the user
+==========================================
+*/
 void SearchPerson( char **head ) {
+    system("cls");
+
     if ( isEmpty( head ) ) {
-        system("cls");
         printf("List is empty.\n\n");
         return;
     }
-
-    system("cls");
 
     printf("Enter the name to search: \n");
     fflush(stdin);
@@ -209,7 +225,7 @@ void SearchPerson( char **head ) {
             system("cls");
             printf("Name: %s\n",          (char *)(*head));
             printf("Age: %d\n",           *(int *)(*head + NAMESIZE));
-            printf("Phone Number: %d\n",  *(int *)(*head + NAMESIZE + AGESIZE));
+            printf("Phone Number: %d\n\n",  *(int *)(*head + NAMESIZE + AGESIZE));
 
             return;
         } else {
@@ -218,7 +234,6 @@ void SearchPerson( char **head ) {
         }
     }
 
-    system("cls");
     printf("Name not founded!\n");
 }
 
@@ -250,7 +265,6 @@ int main( int argc, char const *argv[] ) {
         |  i  | option | personCounter | tempName   | tempAge | tempPhone |
         | int |   int  |      int      | char[10]+1 |    int  |    int    |
     */
-
 
     do {
         printf("1) Add Person\n");
