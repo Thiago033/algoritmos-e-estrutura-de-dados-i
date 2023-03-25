@@ -121,14 +121,15 @@ void AddPerson( char **head ) {
     *ptr = newPerson;
 
     while ( *head != NULL ) {
-        char ptrPrevious = *head;
+        char *ptrPrevious = *head;
 
         // Jump to the next person
         head = (char **)(*head + NEXT);
 
         if ( *head != NULL ) {
             // Update "previous" pointer of newPerson
-            *(char **)(*head + PREVIOUS) = ptrPrevious;
+            // (uintptr_t) = Unsigned integer type that is guaranteed to be large enough to hold any valid pointer value.
+            *(char **)(*head + PREVIOUS) = (char *)(uintptr_t)*ptrPrevious;
         }
     }
 
