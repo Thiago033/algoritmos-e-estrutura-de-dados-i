@@ -56,7 +56,7 @@ NewPerson
     Return a pointer to a new person data
 ==========================================
 */
-void* NewPerson() { 
+void* NewPerson() {
     void *newPerson = NULL;
 
     newPerson = (void*)(malloc( PERSONSIZE ));
@@ -154,7 +154,7 @@ void RemovePerson( char **head ) {
     } else {
     //Remove person on the head of the list
 
-        ptr = *head; 
+        ptr = *head;
 
         // Jump to the next person
         *head =  *(char **)(*head + NEXT); 
@@ -205,7 +205,8 @@ void PrintList( char **head ) {
 ==========================================
 SearchPerson
 
-    Prints a person specified by the user
+    Prints a person specified by the 
+    user (by name).
 ==========================================
 */
 void SearchPerson( char **head ) {
@@ -296,7 +297,6 @@ int main( int argc, char const *argv[] ) {
             system("cls");
             printf("Quit...");
             free( pBuffer );
-            free( head );
             exit(1);
             break;
         

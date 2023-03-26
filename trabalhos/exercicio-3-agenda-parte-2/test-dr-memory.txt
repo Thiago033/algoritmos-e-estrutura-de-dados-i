@@ -1,0 +1,36 @@
+~~Dr.M~~ Dr. Memory version 2.5.0
+~~Dr.M~~ Running "C:\Repositorio\algoritmos-e-estrutura-de-dados-i\trabalhos\exercicio-3-agenda-parte-2\src\main.exe"
+~~Dr.M~~ Using system call file C:\Users\thiag\AppData\Roaming\Dr. Memory\symcache\syscalls_x64.txt
+~~Dr.M~~
+~~Dr.M~~ Error #1: UNADDRESSABLE ACCESS beyond top of stack: reading 0x0000006d11bff760-0x0000006d11bff768 8 byte(s)
+~~Dr.M~~ # 0 ___chkstk_ms
+~~Dr.M~~ # 1 _pei386_runtime_relocator
+~~Dr.M~~ # 2 __tmainCRTStartup
+~~Dr.M~~ # 3 .l_start
+~~Dr.M~~ # 4 KERNEL32.dll!BaseThreadInitThunk       +0x13     (0x00007ffc981c7614 <KERNEL32.dll+0x17614>)
+~~Dr.M~~ Note: @0:00:00.262 in thread 5364
+~~Dr.M~~ Note: 0x0000006d11bff760 refers to 744 byte(s) beyond the top of the stack 0x0000006d11bffa48
+~~Dr.M~~ Note: instruction: or     $0x0000000000000000 (%rcx) -> (%rcx)
+1) Add Person
+2) Remove Person
+3) Print List
+4) Search Person
+0) Quit
+~~Dr.M~~
+~~Dr.M~~ Error #2: UNADDRESSABLE ACCESS beyond top of stack: reading 0x0000006d11bfea50-0x0000006d11bfea58 8 byte(s)
+~~Dr.M~~ # 0 ___chkstk_ms
+~~Dr.M~~ # 1 __mingw_vfscanf
+~~Dr.M~~ # 2 scanf
+~~Dr.M~~ # 3 main
+~~Dr.M~~ Note: @0:00:00.346 in thread 5364
+~~Dr.M~~ Note: 0x0000006d11bfea50 refers to 4072 byte(s) beyond the top of the stack 0x0000006d11bffa38
+~~Dr.M~~ Note: instruction: or     $0x0000000000000000 (%rcx) -> (%rcx)
+~~Dr.M~~
+~~Dr.M~~ Error #3: UNADDRESSABLE ACCESS beyond top of stack: reading 0x0000006d11bfea10-0x0000006d11bfea18 8 byte(s)
+~~Dr.M~~ # 0 ___chkstk_ms
+~~Dr.M~~ # 1 __mingw_vfscanf
+~~Dr.M~~ # 2 scanf
+~~Dr.M~~ # 3 main
+~~Dr.M~~ Note: @0:00:00.346 in thread 5364
+~~Dr.M~~ Note: 0x0000006d11bfea10 refers to 4136 byte(s) beyond the top of the stack 0x0000006d11bffa38
+~~Dr.M~~ Note: instruction: or     $0x0000000000000000 (%rcx) -> (%rcx)

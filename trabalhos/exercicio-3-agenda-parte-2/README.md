@@ -19,10 +19,20 @@ Continuar a sua implementação da agenda (exercício 3) semana 1 dentro dos mes
 https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/tree/main/trabalhos/exercicio-3-agenda-parte-2
 
 ### Codigo:
-x
+Codigo funcionando normalmente.
+Erro ao rodar o teste com dr. memory.
 
 ### Lista De Testes:
-x
+AddPerson - ["a", 10, 11]\
+AddPerson - ["d", 20, 22]\
+AddPerson - ["c", 30, 33]\
+AddPerson - ["b", 40, 44]\
+PrintList()\
+RemovePerson()\
+RemovePerson()\
+PrintList()\
+SearchPerson - ["c"]\
+SearchPerson - ["a"]
 
 ### Teste Dr. Memory:
 https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos/exercicio-3-agenda-parte-2/test-dr-memory.txt
