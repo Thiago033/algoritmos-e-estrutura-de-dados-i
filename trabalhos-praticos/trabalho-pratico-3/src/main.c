@@ -63,42 +63,42 @@ int DiameterOfBinaryTree( struct TreeNode* root ) {
 }
 
 int main(int argc, char const *argv[]) {
-    //EXAMPLE 1:
-    //Entrada: raiz = [1,2,3,4,5]
-    // Saída: 3
+    // //EXAMPLE 1:
+    // //Entrada: raiz = [1,2,3,4,5]
+    // // Saída: 3
 
-    // Create tree root
-    TreeNode *root = malloc( sizeof(TreeNode) );
-    root->val = 1;
-    root->left = NULL;  
-    root->right = NULL;
+    // // Create tree root
+    // TreeNode *root = malloc( sizeof(TreeNode) );
+    // root->val = 1;
+    // root->left = NULL;  
+    // root->right = NULL;
 
-    TreeNode *node2 = malloc( sizeof(TreeNode) );
-    node2->val = 2;
-    node2->left = NULL;
-    node2->right = NULL;
+    // TreeNode *node2 = malloc( sizeof(TreeNode) );
+    // node2->val = 2;
+    // node2->left = NULL;
+    // node2->right = NULL;
 
-    TreeNode *node3 = malloc( sizeof(TreeNode) );
-    node3->val = 3;
-    node3->left = NULL;
-    node3->right = NULL;
+    // TreeNode *node3 = malloc( sizeof(TreeNode) );
+    // node3->val = 3;
+    // node3->left = NULL;
+    // node3->right = NULL;
 
-    TreeNode *node4 = malloc( sizeof(TreeNode) );
-    node4->val = 4;
-    node4->left = NULL;
-    node4->right = NULL;
+    // TreeNode *node4 = malloc( sizeof(TreeNode) );
+    // node4->val = 4;
+    // node4->left = NULL;
+    // node4->right = NULL;
 
-    TreeNode *node5 = malloc( sizeof(TreeNode) );
-    node5->val = 5;
-    node5->left = NULL;
-    node5->right = NULL;
+    // TreeNode *node5 = malloc( sizeof(TreeNode) );
+    // node5->val = 5;
+    // node5->left = NULL;
+    // node5->right = NULL;
 
-    // Update pointers
-    root->left = node2;
-    root->right = node3;
+    // // Update pointers
+    // root->left = node2;
+    // root->right = node3;
 
-    node2->left = node4;
-    node2->right = node5;
+    // node2->left = node4;
+    // node2->right = node5;
 
     // -------------------------------------------------
 
@@ -122,29 +122,29 @@ int main(int argc, char const *argv[]) {
 
     // -------------------------------------------------
     
-    // //EXAMPLE 3:
-    // //Entrada: raiz = [1,2,3]
-    // //Saída: 3
+    //EXAMPLE 3:
+    //Entrada: raiz = [1,2,3]
+    //Saída: 2
 
-    // // Create tree root
-    // TreeNode *root = malloc( sizeof(TreeNode) );
-    // root->val = 1;
-    // root->left = NULL;
-    // root->right = NULL;
+    // Create tree root
+    TreeNode *root = malloc( sizeof(TreeNode) );
+    root->val = 1;
+    root->left = NULL;
+    root->right = NULL;
 
-    // TreeNode *node2 = malloc( sizeof(TreeNode) );
-    // node2->val = 2;
-    // node2->left = NULL;
-    // node2->right = NULL;
+    TreeNode *node2 = malloc( sizeof(TreeNode) );
+    node2->val = 2;
+    node2->left = NULL;
+    node2->right = NULL;
 
-    // TreeNode *node3 = malloc( sizeof(TreeNode) );
-    // node3->val = 3;
-    // node3->left = NULL;
-    // node3->right = NULL;
+    TreeNode *node3 = malloc( sizeof(TreeNode) );
+    node3->val = 3;
+    node3->left = NULL;
+    node3->right = NULL;
 
-    // //Update pointers
-    // root->left = node2;
-    // root->right = node3;
+    //Update pointers
+    root->left = node2;
+    root->right = node3;
 
     InOrder( root );
     printf("\n\n");
