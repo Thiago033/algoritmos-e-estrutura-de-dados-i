@@ -10,7 +10,7 @@ Exercicio: Diâmetro de uma árvore binária\
 Exercicio LeetCode: [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 
 ### Git:
-xxx
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/tree/main/trabalhos-praticos/trabalho-pratico-3
 
 ### Codigo:
 Codigo feito em aula:
@@ -24,4 +24,4 @@ Entrada: raiz = [1,2]       / return 1\
 Entrada: raiz = [1,2,3]     / return 2\
 
 ### Teste Dr. Memory:
-xxx
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos-praticos/trabalho-pratico-3/test-dr-memory.txt
