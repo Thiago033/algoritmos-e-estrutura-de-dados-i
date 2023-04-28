@@ -4,6 +4,12 @@
 #include <math.h>
 #include <time.h>
 
+void swap( int *xp, int *yp ) {
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
 /*
 ==================
 Merge Sort
@@ -114,24 +120,19 @@ void quickSort(int *array, int low, int high) {
 Selection Sort
 ==================
 */
-void selectionSort(int *array, int size) {
-    int i,j, smaller, swap;
+void selectionSort( int *array, int size ) {
+    int i, j, min_idx;
 
-    for (i = 0; i < size - 1; i++) {
+    for ( i = 0; i < size-1; i++ ) {
+        min_idx = i;
 
-        smaller = i;
-
-        for (j = i + 1; j < size; j++) {
-            if (array[j] < array[smaller]) {
-                smaller = j;
+        for (j = i+1; j < size; j++) {
+            if (array[j] < array[min_idx]) {
+                min_idx = j;
             }
         }
         
-        if (i != smaller) {
-            swap = array[i];
-            array[i] = array[smaller];
-            array[smaller] = swap;
-        }
+        swap(&array[min_idx], &array[i]);
     }
 }
 
@@ -140,22 +141,23 @@ void selectionSort(int *array, int size) {
 Insertion Sort
 ==================
 */
-void insertionSort(int *array, int size) {
-    int i, j, aux;
+void insertionSort( int *array, int size ) {
+    int i, j, key;
 
-    for (i = i; i < size; i++) {
-        aux = array[i];
+    for ( i = 1; i < size; i++ ) {
+        key = array[i];
+        j = i - 1;
 
-        for (j = i; (j > 0) && (aux < array[j - 1]); j--) {
-            array[j] = array[j - 1];
+        while ( j >= 0 && array[j] > key ) {
+            array[j + 1] = array[j];
+            j--;
         }
 
-        array[j] = aux;
+        array[j + 1] = key;
     }
 }
 
-void printArray(int arr[], int size)
-{
+void printArray(int arr[], int size) {
     int i;
     for (i=0; i < size; i++)
         printf("%d ", arr[i]);
@@ -176,7 +178,7 @@ int isSorted(int* array, int size){
 int main () {
     int size, option;
 
-    time_t t1 = time(NULL);
+    time_t randomSeed = time(NULL);
 
     struct timespec begin, end; 
 
@@ -186,64 +188,52 @@ int main () {
     int* array = (int  *) malloc(sizeof(int) * size);
 
     //define the random number generator
-    srand(1);
+    srand(randomSeed);
 
     for (int i = 0; i < size; i++) {
         array[i] = rand() % 100;
     }
 
-    // print array unsorted
-    // for (int i = 0; i < size; i++) {
-    //     printf("%d ", array[i]);
-    // }
-    // printf("\n");
+    printf ("==========================\n");
+    printf("Select the sort method:    \n");
+    printf("1) Insertion Sort          \n");
+    printf("2) Selection Sort          \n");
+    printf("3) Quick Sort              \n");
+    printf("4) Merge Sort              \n");
+    printf("5) Quit                    \n");
+    printf ("==========================\n");
+    scanf("%d", &option);
 
-    do {
-        printf ("==========================\n");
-        printf("Select the sort method:    \n");
-        printf("1) Insertion Sort          \n");
-        printf("2) Selection Sort          \n");
-        printf("3) Quick Sort              \n");
-        printf("4) Merge Sort              \n");
-        printf("5) Quit                    \n");
-        printf ("==========================\n");
-        scanf("%d", &option);
+    // ==============
+    // TIMER START
+    // ==============
+    clock_gettime(CLOCK_REALTIME, &begin);
 
-        // ==============
-        // TIMER START
-        // ==============
-        clock_gettime(CLOCK_REALTIME, &begin);
+    switch (option) {
+    case 1:
+        insertionSort(array, size);
+        break;
+    
+    case 2:
+        selectionSort(array, size);
+        break;
+    
+    case 3:
+        quickSort(array, 0, size-1);
+        break;
 
-        switch (option)
-        {
-        case 1:
-            insertionSort(array, size);
-            break;
-        
-        case 2:
-            selectionSort(array, size);
-            break;
-        
-        case 3:
-            quickSort(array, 0, size-1);
-            break;
-
-        case 4:
-            mergeSort(array, 0, size-1);
-            break;
-        
-        case 5:
-            printf("Quit.\n\n");
-            break;
-        
-        default:
-            printf("Invalid option! try again!\n");
-            break;
-        }
-
-        option = 6;
-
-    } while (option != 6);
+    case 4:
+        mergeSort(array, 0, size-1);
+        break;
+    
+    case 5:
+        printf("Quit.\n\n");
+        break;
+    
+    default:
+        printf("Invalid option!\n");
+        break;
+    }
 
     // ==============
     // TIMER END
@@ -254,17 +244,14 @@ int main () {
     long seconds = end.tv_sec - begin.tv_sec;
     long nanoseconds = end.tv_nsec - begin.tv_nsec;
     double elapsed = seconds + nanoseconds*1e-9;
-    
-    //printing array
-    printf("==========================\n");
-   
-    //printArray(array, size);
 
-    isSorted(array, size) ? printf("\nArray sorted!\n") : printf("\nError!\nArray not sorted!\n");
+    printf("============================================\n");
+
+    isSorted(array, size) ? printf("Array is sorted!\n") : printf("Error!\nArray isn't sorted!\n");
 
     printf("Time measured: %f seconds.\n", elapsed);
 
-    printf("==========================\n");
+    printf("============================================\n");
     
     free(array);
 
