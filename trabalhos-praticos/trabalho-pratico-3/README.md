@@ -18,10 +18,10 @@ Erro: Nao chamando a funcao "diameterOfBinaryTree" para verificar recursivamente
 
 Sem leaks de memoria.
 
-### Lista De Testes:
 Entrada: raiz = [1,2,3,4,5] / return 3\
 Entrada: raiz = [1,2]       / return 1\
 Entrada: raiz = [1,2,3]     / return 2\
+### Lista De Testes:
 
 ### Teste Dr. Memory:
 https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos-praticos/trabalho-pratico-3/test-dr-memory.txt

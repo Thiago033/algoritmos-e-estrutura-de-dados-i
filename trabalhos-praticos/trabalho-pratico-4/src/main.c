@@ -61,7 +61,7 @@ void selectionSortIndex( struct pair *array, int size ) {
 }
 
 int* maxSubsequence( int* nums, int numsSize, int k, int* returnSize ) {
-    returnSize = (int *)k;
+    *returnSize = k;
 
     if ( k == numsSize ) return nums;
 
@@ -87,16 +87,16 @@ int* maxSubsequence( int* nums, int numsSize, int k, int* returnSize ) {
 }
 
 int main() {
-    int array[10] = {63,-74,61,-17,-55,-59,-10,2,-60,-65};
-    int size = 10;
+    int returnSize;
 
-    int *returnSize;
-    
+    int array[4] = {-1,-2,3,4};
+    int size = 4;
+
     // number of elements in the subsequence
-    int k = 9;
+    int k = 3;
 
-    int *returnArray = (int *)malloc(sizeof(int) * k);
-    returnArray = maxSubsequence( array, size, k, returnSize );
+    //int *returnArray = (int *)malloc(sizeof(int) * k);
+    int *returnArray = maxSubsequence( array, size, k, &returnSize );
 
     // print max subsequence
     for ( int j = 0; j < k; j++ ) {
