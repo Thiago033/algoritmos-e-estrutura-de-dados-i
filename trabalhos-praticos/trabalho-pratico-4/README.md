@@ -10,7 +10,7 @@ Exercicio: Subsequência de comprimento K com a maior soma\
 Exercicio LeetCode: [2099. Find Subsequence of Length K With the Largest Sum](https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/)
 
 ### Git:
-x
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/tree/main/trabalhos-praticos/trabalho-pratico-4
 
 ### Codigo:
 Codigo feito em aula:
@@ -24,4 +24,4 @@ Entrada: nums = [-1,-2,3,4], k = 3 / return: [-1,3,4]\
 Entrada: nums = [63,-74,61,-17,-55,-59,-10,2,-60,-65], k = 9 / return: [63, 61, -17, -55, -59, -10, 2, -60, -65]\
 
 ### Teste Dr. Memory:
-x
+https://github.com/Thiago033/algoritmos-e-estrutura-de-dados-i/blob/main/trabalhos-praticos/trabalho-pratico-4/test-dr-memory.txt
