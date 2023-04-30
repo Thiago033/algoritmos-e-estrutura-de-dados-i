@@ -75,27 +75,26 @@ int* maxSubsequence( int* nums, int numsSize, int k, int* returnSize ) {
     selectionSortValue( pairs, numsSize );
     selectionSortIndex (pairs, k );
 
-    int * sol = (int*)malloc( sizeof(int) * k );
+    int * returnArray = (int*)malloc( sizeof(int) * k );
 
     for ( int i = 0; i < k ; i++ ) {
-        sol[i] = nums[pairs[i].index];
+        returnArray[i] = nums[pairs[i].index];
     }
 
     free( pairs );
 
-    return sol;
+    return returnArray;
 }
 
 int main() {
     int returnSize;
 
-    int array[4] = {-1,-2,3,4};
-    int size = 4;
+    int array[10] = {63,-74,61,-17,-55,-59,-10,2,-60,-65};
+    int size = 10;
 
     // number of elements in the subsequence
-    int k = 3;
+    int k = 9;
 
-    //int *returnArray = (int *)malloc(sizeof(int) * k);
     int *returnArray = maxSubsequence( array, size, k, &returnSize );
 
     // print max subsequence
